@@ -5,6 +5,11 @@ config()
 
 export async function POST(req){
     const data = await req.json()
+    console.log(data);
+    if(data.events.length === 0){
+        console.log("verify test");
+        return NextResponse.json({"message":"success"})
+    }
     const group = data.events[0].source.groupId
     if(data.events[0].type === "memberJoined"){
         await axios.post("https://api.line.me/v2/bot/message/push",
@@ -21,8 +26,8 @@ export async function POST(req){
             Authorization : `Bearer ${process.env.MSG_TOKEN}`
         } }    
     )
-    }
-    return NextResponse.json({"message":"success"})
+}
+return NextResponse.json({"message":"success"})
 }
 
 export async function GET(){
