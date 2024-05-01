@@ -5,7 +5,6 @@ config()
 
 export async function POST(req){
     const data = await req.json()
-    console.log(data);
     if(data.events.length === 0){
         console.log("verify test");
         return NextResponse.json({"message":"success"})
